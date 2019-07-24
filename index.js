@@ -1,6 +1,6 @@
-const { source_port, mode, destinations } = require('./config');
-const tcp_server = require('./tcp_server');
-const udp_server = require('./udp_server');
+const { source_port, mode, destinations } = require('./config/config');
+const tcp_server = require('./servers/tcp_server');
+const udp_server = require('./servers/udp_server');
 
 // Print the environment variables to Listen and forward data
 console.log(`PEG Replicator Starts with:\nSOURCE_PORT: ${source_port} \nMODE: ${mode} \nDESTINATIONS:`); 

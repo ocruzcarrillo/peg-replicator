@@ -1,4 +1,4 @@
-const { peg_replicator } = require('./peg_replicator');
+const { peg_replicator } = require('./../lib/peg_replicator');
 const net = require('net');
 
 let sockets = [];

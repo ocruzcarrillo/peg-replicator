@@ -1,4 +1,4 @@
-const { source_port, mode, destinations } = require('./../config');
+const { source_port, mode, destinations } = require('./../config/config');
 const host = '127.0.0.1';
 
 var dgram = require('dgram');

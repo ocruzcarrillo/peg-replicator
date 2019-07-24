@@ -1,4 +1,4 @@
-const { source_port, mode, destinations } = require('./../config');
+const { source_port, mode, destinations } = require('./../config/config');
 const net = require('net');
 const client = new net.Socket();
 const host = '127.0.0.1';
