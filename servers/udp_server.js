@@ -12,12 +12,20 @@ function start_server(source_port, destinations) {
 	});
 	
 	server.on('message', (msg, rinfo) => {
-	  console.log(`UDP Server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+	  console.log(`UDP Server message: ${msg} from ${rinfo.address}:${rinfo.port}`);
 	});
 
 	server.on('listening', () => {
 	  const address = server.address();
 	  console.log(`UDP Server listening ${address.address}:${address.port}`);
+	});
+	
+	server.on('close', (msg, rinfo) => {
+	  console.log(`UDP Server close: ${msg} from ${rinfo.address}:${rinfo.port}`);
+	});
+	
+	server.on('connect', (msg, rinfo) => {
+	  console.log(`UDP Server connect: ${msg} from ${rinfo.address}:${rinfo.port}`);
 	});
 	
 	server.bind(source_port);

@@ -6,7 +6,7 @@ const host = '127.0.0.1';
 client.connect(source_port, host, function() {
     console.log('Connected');
     client.write("Hello From Testing TCP Client " + client.address().address);
-	// client.end();
+	client.end();
 });
 
 client.on('data', function(data) {
