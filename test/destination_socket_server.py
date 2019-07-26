@@ -14,7 +14,8 @@ HOST = None
 PORT = None
 
 # thread fuction 
-def threaded(conn, addr): 
+def threaded(conn, addr, MODE): 
+    print(MODE)
     while True: 
         if MODE == "TCP":
             # data received from client 
@@ -81,7 +82,7 @@ def Main(argv):
         print_lock.acquire() 
 
         # Start a new thread and return its identifier 
-        start_new_thread(threaded, (conn, addr, )) 
+        start_new_thread(threaded, (conn, addr, MODE, )) 
     s.close() 
 
 

@@ -30,7 +30,7 @@ function start_server(source_port, destinations) {
 			console.log('TCP Socket data ' + sock.remoteAddress + ': ' + data);
 			
 			// Call the magic for the PEG Replication Tool
-			peg_replicator(sock, Sring(data), destinations)
+			peg_replicator(sock, data, destinations)
 		});
 		
 		// Subscribed to the Socket 'connect' event
@@ -57,6 +57,7 @@ function start_server(source_port, destinations) {
 		// Subscribed to the Socket 'drain' event
 		sock.on('drain', () => {
 			console.log('TCP Socket drain ' + sock.remoteAddress);
+			sock.resume();
 		});
 		
 		// Subscribed to the Socket 'end' event
@@ -77,7 +78,7 @@ function start_server(source_port, destinations) {
 		// Subscribed to the Socket 'timeout' event
 		sock.on('timeout', () => {
 			console.log('TCP Socket timeout ' + sock.remoteAddress);
-			socket.end();
+			sock.end('Timed out!');
 		});
 	});
 	

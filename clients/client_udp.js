@@ -12,13 +12,17 @@ function send_to_destination(destination, data) {
 	
 	return new Promise(function(resolve, reject) {
 		client.on('message',function(msg){
-			console.log("omar", msg);
 			client.close();
-			resolve(msg);
+			resolve(String(msg));
 		});
 
 		client.on('close', function() {
 			resolve("Connction closed");
+		});
+		
+		client.on('error', function(err) {
+			client.close();
+			reject(err);
 		});
 		
 		client.send(message, 0, message.length, destination.port, destination.host, function(err) {

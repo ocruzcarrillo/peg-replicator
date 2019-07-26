@@ -5,7 +5,7 @@ ISC Omar Cruz Carrillo
 const net = require('net');
 
 function send_to_destination(destination, data) {
-	console.log('send_to_tp_destination', destination);
+	console.log('send_to_tcp_destination', destination);
 	const client = new net.Socket();
 	
 	return new Promise(function(resolve, reject) {
@@ -15,11 +15,16 @@ function send_to_destination(destination, data) {
 
 		client.on('data', function(data) {
 			client.end();
-			resolve(data);
+			resolve(String(data));
 		});
 
 		client.on('close', function() {
-			resolve("Connction closed");
+			resolve("Connection closed");
+		});
+		
+		client.on('error', function(err) {
+			client.end();
+			reject(err);
 		});
 		
 		client.write(data);
