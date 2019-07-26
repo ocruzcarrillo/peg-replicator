@@ -4,7 +4,7 @@
   "description": "PEG Replicator is a tool to provide concurrency functionality to a TCP / UDP type connection for IoT devices. It can have various purposes: - Replication of information per se - Diversification of functionality of the same source of information - Asynchronous treatment of non-dependent data - Forward data to mirror servers or other platforms - Others",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"The correct way to Full Testing this Tool is documented in: https://github.com/ocruzcarrillo/peg-replicator\" && exit 1"
   },
   "repository": {
     "type": "git",

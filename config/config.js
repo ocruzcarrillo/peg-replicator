@@ -1,4 +1,6 @@
-// config.js
+/*
+ISC Omar Cruz Carrillo
+*/
 
 // Load library to read .env file with environment variables
 const dotenv = require('dotenv');
@@ -7,11 +9,16 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Transform DESTINATIONS csv format to Json Object
+var primary = true;
 destinations = process.env.DESTINATIONS.split(',').map( e => {
 	_e = {
-		ip: e.split(':')[0],
-		port: e.split(':')[1]
+		host: e.split(':')[0],
+		port: e.split(':')[1],
+		primary: primary
 	}
+	
+	primary = false
+	
 	return _e
 })
 

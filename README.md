@@ -50,3 +50,30 @@ Helps to develop building scalable network applications. It uses an event-driven
 Is an object-oriented, high level, dynamic and multipurpose programming language. It has features like support for major databases, functional and statured programming, etc. Is best suited for developing scientific and big data solutions.
 
 *Impossible to leave out, therefore I will use it to test the operation and performance of the Application*
+## Full Run / Testing
+### Start the Destinations
+For this excercise, I create a Echo TCP and UDP Servers for work like a destination. For start a destination Server:
+
+    python test\destination_socket_server.py {MODE} {host} {port}
+
+For my **.env** example file would be:
+*Primary destination*
+
+    python test\destination_socket_server.py UDP localhost 1234
+    
+*Secondary destination*
+
+	python test\destination_socket_server.py UDP localhost 5678
+### Start PEG Replicator Tool
+For start the PEG Replicator Tool
+
+	node index.js
+	
+### Simulate one connection
+*TCP*
+
+	node test\client_tcp.js
+
+*UDP*
+
+	node test\client_udp.js
