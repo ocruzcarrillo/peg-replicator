@@ -8,7 +8,7 @@ var message = Buffer.from("Hello From Testing UDP Client ");
 
 client.on('message',function(msg){
 	console.log('Server Says : ' + msg);
-	client.close();
+	// client.close();
 });
 
 client.on('close', function() {

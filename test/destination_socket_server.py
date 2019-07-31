@@ -47,7 +47,7 @@ def threaded(conn, addr, MODE):
             print(conn)
             print(data)
             print(addr)
-            conn.sendto(data, addr)
+            conn.sendto(data + str.encode(':' + str(addr[1])), addr)
 
     # Connection closed 
     conn.close() 
