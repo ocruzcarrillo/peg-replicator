@@ -1,9 +1,14 @@
-# import argv library
+"""
+ISC Omar Cruz Carrillo
+
+destination_socket_server.py
+"""
+# Import argv library
 import sys
-# import socket programming library 
+# Import socket programming library 
 import socket 
 
-# import thread module 
+# Import thread module 
 from _thread import *
 import threading 
 
@@ -13,32 +18,38 @@ MODE = None
 HOST = None
 PORT = None
 
-# thread fuction 
+# Thread fuction 
 def threaded(conn, addr, MODE): 
     print(MODE)
     while True: 
+        # Data received from client 
         if MODE == "TCP":
-            # data received from client 
             data = conn.recv(1024) 
         else:
+            # Set the timeout
+            # conn.settimeout(10);
+            
             data, addr = conn.recvfrom(1024)
             
         print('Connected to :', addr[0], ':', addr[1]) 
         
         if not data:             
-            # lock released on exit 
+            # Lock released on exit 
             print_lock.release() 
             break
 
-        # send data o client
+        # Send data to client
         print("Receive: ", data) 
         
         if MODE == "TCP":
-            conn.send(data) 
+            conn.send(data + str.encode(':' + str(addr[1]))) 
         else:
+            print(conn)
+            print(data)
+            print(addr)
             conn.sendto(data, addr)
 
-    # connection closed 
+    # Connection closed 
     conn.close() 
 
 
@@ -64,24 +75,27 @@ def Main(argv):
     print("socket binded to port", PORT) 
 
     if MODE == "TCP":
-        # put the socket into listening mode 
+        # Put the socket into listening mode 
         s.listen(1000) 
         print("socket is listening") 
 
-    # a forever loop until client wants to exit 
+    # A forever loop until client wants to exit 
     while True: 
 
         if MODE == "TCP":
-            # establish connection with TCP client 
+            # Establish connection with TCP client 
             conn, addr = s.accept() 
+            
+            # Set the timeout
+            # s.settimeout(10);
         else:
             addr = None
             conn = s
 
-        # lock acquired by client 
+        # Lock acquired by client 
         print_lock.acquire() 
 
-        # Start a new thread and return its identifier 
+        # Start a new thread 
         start_new_thread(threaded, (conn, addr, MODE, )) 
     s.close() 
 

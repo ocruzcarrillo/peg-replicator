@@ -1,5 +1,7 @@
 /*
 ISC Omar Cruz Carrillo
+
+config.js
 */
 
 // Load library to read .env file with environment variables
@@ -26,5 +28,6 @@ destinations = process.env.DESTINATIONS.split(',').map( e => {
 module.exports = {
   source_port: process.env.SOURCE_PORT,
   mode: process.env.MODE,
-  destinations: destinations
+  destinations: destinations,
+  ms_timeout_destinations: process.env.MS_TIMEOUT_DESTINATIONS
 };

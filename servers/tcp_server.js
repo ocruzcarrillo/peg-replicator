@@ -1,11 +1,13 @@
 /*
 ISC Omar Cruz Carrillo
 
+tcp_server.js
+
 All the Server and Socket Events was taken from: https://nodejs.org/api/net.html
 */
 
 // Import the PEG Replicator
-const { peg_replicator } = require('./../lib/peg_replicator');
+const { PegReplicator } = require('./../lib/peg_replicator');
 // Import the TCP library
 const net = require('net');
 
@@ -13,8 +15,8 @@ const net = require('net');
 let sockets = [];
 
 // Declare the function that manage the TCP Server 
-function start_server(source_port, destinations) {
-	const server = net.createServer();	
+function start_server() {
+	server = net.createServer();	
 	
 	// Listen over port declared in the .evn file
 	server.listen(source_port);
@@ -30,7 +32,7 @@ function start_server(source_port, destinations) {
 			console.log('TCP Socket data ' + sock.remoteAddress + ': ' + data);
 			
 			// Call the magic for the PEG Replication Tool
-			peg_replicator(sock, data, destinations)
+			new PegReplicator(sock, data).send_data();
 		});
 		
 		// Subscribed to the Socket 'connect' event
@@ -98,6 +100,11 @@ function start_server(source_port, destinations) {
 	  const address = server.address();
 	  console.log(`TCP Server listening ${address.address}:${address.port}`);
 	});
+	
+	// Clean the Responses. If other destinations send identical traffic within 30 seconds
+	setInterval(function() {
+		PegReplicator.clearResponses();
+	}, 3000);
 }
 
 // Exports function to manage TCP Socket Server
