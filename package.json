@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ocruzcarrillo/peg-replicator#readme",
   "dependencies": {
     "dotenv": "^8.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "promise": "^8.0.3"
   }
 }
